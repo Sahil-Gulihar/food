@@ -66,7 +66,7 @@ const DonatePage = () => {
   ]);
 
   // Handle donation submission
-  const handleDonationSubmit = (e) => {
+  const handleDonationSubmit = (e:any) => {
     e.preventDefault();
 
     // Create new donation

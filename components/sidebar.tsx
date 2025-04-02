@@ -14,11 +14,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-const Sidebar = ({ isSidebarOpen, toggleSidebar, setIsSidebarOpen }) => {
+const Sidebar = ({ isSidebarOpen, toggleSidebar, setIsSidebarOpen }:any) => {
   const pathname = usePathname();
 
   // Function to check if the current path matches the link
-  const isActive = (path) => {
+  const isActive = (path:any) => {
     return pathname === path;
   };
 
@@ -139,16 +139,20 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar, setIsSidebarOpen }) => {
           </p>
           <ul className="space-y-1">
             <li>
+              <Link href="/profile">
               <button className="w-full flex items-center px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100">
                 <User size={16} className="mr-2" />
                 <span>Profile</span>
               </button>
+              </Link>
             </li>
             <li>
+              <Link href="/settings">
               <button className="w-full flex items-center px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100">
                 <Settings size={16} className="mr-2" />
                 <span>Settings</span>
               </button>
+              </Link>
             </li>
             <li>
               <button className="w-full flex items-center px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100">
@@ -161,10 +165,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar, setIsSidebarOpen }) => {
       </nav>
 
       <div className="p-4 border-t border-gray-200">
+        <Link href="/">
         <button className="w-full flex items-center px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100">
           <LogOut size={16} className="mr-2" />
           <span>Sign Out</span>
         </button>
+        </Link>
       </div>
     </div>
   );

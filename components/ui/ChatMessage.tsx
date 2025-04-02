@@ -1,5 +1,6 @@
 import React from "react";
 import { Message } from "@/types";
+import ReactMarkdown from 'react-markdown';
 
 interface ChatMessageProps {
   message: Message;
@@ -19,7 +20,9 @@ export function ChatMessage({ message }: ChatMessageProps) {
             : "bg-gray-100 text-gray-800"
         }`}
       >
-        <p className="text-sm">{message.content}</p>
+        <div className="text-sm">
+          <ReactMarkdown>{message.content}</ReactMarkdown>
+        </div>
         <div className="text-xs mt-1 opacity-70">
           {new Date(message.timestamp).toLocaleTimeString([], {
             hour: "2-digit",
