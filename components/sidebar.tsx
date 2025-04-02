@@ -1,13 +1,36 @@
-import { Gift, HelpCircle, Home, LogOut, MapIcon, Settings, User, UserCheck, X } from "lucide-react";
+import {
+  BotIcon,
+  Gift,
+  HelpCircle,
+  Home,
+  LogOut,
+  MapIcon,
+  Settings,
+  User,
+  UserCheck,
+  X,
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
-const Sidebar = ({
-  isSidebarOpen,
-  toggleSidebar,
-  setActiveTab,
-  setIsSidebarOpen,
-  activeTab,
-}:any) => {
+const Sidebar = ({ isSidebarOpen, toggleSidebar, setIsSidebarOpen }) => {
+  const pathname = usePathname();
+
+  // Function to check if the current path matches the link
+  const isActive = (path) => {
+    return pathname === path;
+  };
+
+  // Safe close function that checks if setIsSidebarOpen is a function
+  const handleClose = () => {
+    if (typeof setIsSidebarOpen === "function") {
+      setIsSidebarOpen(false);
+    } else if (typeof toggleSidebar === "function" && isSidebarOpen) {
+      toggleSidebar();
+    }
+  };
+
   return (
     <div
       className={`
@@ -33,68 +56,79 @@ const Sidebar = ({
           </p>
           <ul className="space-y-1">
             <li>
-              <button
-                className={`w-full flex items-center px-3 py-2 rounded-md text-sm ${
-                  activeTab === "dashboard"
-                    ? "bg-green-50 text-green-600"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-                onClick={() => {
-                  setActiveTab("dashboard");
-                  setIsSidebarOpen(false);
-                }}
-              >
-                <Home size={16} className="mr-2" />
-                <span>Dashboard</span>
-              </button>
+              <Link href="/dashboard">
+                <button
+                  className={`w-full flex items-center px-3 py-2 rounded-md text-sm ${
+                    isActive("/dashboard")
+                      ? "bg-green-50 text-green-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                  onClick={handleClose}
+                >
+                  <Home size={16} className="mr-2" />
+                  <span>Dashboard</span>
+                </button>
+              </Link>
             </li>
             <li>
-              <button
-                className={`w-full flex items-center px-3 py-2 rounded-md text-sm ${
-                  activeTab === "donate"
-                    ? "bg-green-50 text-green-600"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-                onClick={() => {
-                  setActiveTab("donate");
-                  setIsSidebarOpen(false);
-                }}
-              >
-                <Gift size={16} className="mr-2" />
-                <span>Donate Food</span>
-              </button>
+              <Link href="/donate">
+                <button
+                  className={`w-full flex items-center px-3 py-2 rounded-md text-sm ${
+                    isActive("/donate")
+                      ? "bg-green-50 text-green-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                  onClick={handleClose}
+                >
+                  <Gift size={16} className="mr-2" />
+                  <span>Donate Food</span>
+                </button>
+              </Link>
             </li>
             <li>
-              <button
-                className={`w-full flex items-center px-3 py-2 rounded-md text-sm ${
-                  activeTab === "find"
-                    ? "bg-green-50 text-green-600"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-                onClick={() => {
-                  setActiveTab("find");
-                  setIsSidebarOpen(false);
-                }}
-              >
-                <MapIcon size={16} className="mr-2" />
-                <span>Find Food</span>
-              </button>
+              <Link href="/find">
+                <button
+                  className={`w-full flex items-center px-3 py-2 rounded-md text-sm ${
+                    isActive("/find")
+                      ? "bg-green-50 text-green-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                  onClick={handleClose}
+                >
+                  <MapIcon size={16} className="mr-2" />
+                  <span>Find Food</span>
+                </button>
+              </Link>
             </li>
             <li>
-              <button
-                className={`w-full flex items-center px-3 py-2 rounded-md text-sm ${
-                  activeTab === "volunteer"
-                    ? "bg-green-50 text-green-600"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-                onClick={() => {
-                  setActiveTab("volunteer");
-                  setIsSidebarOpen(false);
-                }}
-              >
-                <UserCheck size={16} className="mr-2" />
-                <span>Safety & Volunteer</span>
-              </button>
+              <Link href="/volunteer">
+                <button
+                  className={`w-full flex items-center px-3 py-2 rounded-md text-sm ${
+                    isActive("/volunteer")
+                      ? "bg-green-50 text-green-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                  onClick={handleClose}
+                >
+                  <UserCheck size={16} className="mr-2" />
+                  <span>Safety & Volunteer</span>
+                </button>
+              </Link>
+            </li>
+            <li>
+              <Link href="/chat">
+                <button
+                  className={`w-full flex items-center px-3 py-2 rounded-md text-sm ${
+                    isActive("/chat")
+                      ? "bg-green-50 text-green-600"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                  onClick={handleClose}
+                >
+                  <BotIcon size={16} className="mr-2" />
+                  <span>Chatbot AI</span>
+                </button>
+              </Link>
             </li>
           </ul>
         </div>
