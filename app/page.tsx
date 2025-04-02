@@ -20,7 +20,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     if (username === "sahil_gulihar" && password === "archbtw") {
       window.location.href = "/dashboard";
